@@ -1,0 +1,26 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.3.1' apply false
+    id 'com.android.library' version '7.3.1' apply false
+}
+allprojects {
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            Set<File> fileSet = options.bootstrapClasspath.getFiles()
+            List<File> newFileList =  new ArrayList<>();
+            //JAVA语法，可连续调用，输入参数建议为相对路径
+            newFileList.add(new File("../app/libs/framework.jar"))
+            //最后将原始参数添加
+            newFileList.addAll(fileSet)
+            options.bootstrapClasspath = files(
+                    newFileList.toArray()
+            )
+        }
+    }
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs.add('-Xbootclasspath/p:app\\libs\\framework.jar')
+        }
+    }
+}
