@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -48,6 +49,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.core:core-ktx:+'
     compileOnly files('libs/framework.jar')
 //    implementation project(path: ':mylibrary')
     implementation 'androidx.appcompat:appcompat:1.4.1'
